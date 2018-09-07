@@ -2,22 +2,20 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 
-n = 260  # number of projected weeks
-p = 500  # pre-launch boost, or initial user count
-g = .08  # growth rate
-# r = .65  # retention rate
-r = (np.logspace(0.477, 0.773, n + 1)) * 0.1
+n = int(input('The number of weeks you would like to project for is: '))  # number of projected weeks
+p = int(input('The pre-launch boost is: '))  # pre-launch boost, or initial user count
+g = int(input('The weekly growth rate is: '))* 0.01  # growth rate
+r = (np.logspace(0.477, 0.773, n + 1)) * 0.1  # retention rate is logarithmic (base=10)
 
 # Below are parameters for ARPU/Revenue Calculations
-N = 364  # number of projected weeks for ARPU
+N = int(input('The projected number of weeks to stretch ARPU is: '))  # number of projected weeks for ARPU
 t = np.arange(N + 1)  # Create x-axis (time in # of weeks)
 L = 0  # Lower (y) asymptote;
-U = 14  # Upper (y) asymptote;
+U = int(input('The maximum ARPU value is: '))  # Upper (y) asymptote;
 B = .03  # growth rate; between 0 & 5
 v = .80  # affects near which asymptote maximum growth occurs
 Q = 182  # related to the value Y(0)
 c = 1
-
 
 def Growth_Projection(p, n):  # Takes initial inputs for user population, \
     # growth rate, retention rate, and estimates user population after \
@@ -27,7 +25,6 @@ def Growth_Projection(p, n):  # Takes initial inputs for user population, \
     for i in range(1, n + 1):
         #r = (np.random.choice(11, 1, p=[0, 0, 0, 0.55, 0.25, 0.15, 0.05, \
         #                                0, 0, 0, 0])) * 0.1  # randomized retention rate
-        #r = (np.logspace(0.477, 0.773, n+1))*0.1
         gr = g * r[i]  # growth rate * retention rate
         s = (np.random.choice(13, 1, p=[0, 0, 0, 0, 0, 0.55, 0, 0, 0.3 \
             , 0.1, 0.03, 0, 0.02])) * 0.01  # sharing rate
